@@ -59,10 +59,9 @@
 /*  position: relative;*/
 /*}*/
 .navigation__link {
-  display: block;
   text-transform: uppercase;
   line-height: 2;
-  margin-block: 1em;
+  margin-block: 0.5em;
   position: relative;
 }
 .navigation__link::after {

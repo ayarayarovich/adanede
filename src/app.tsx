@@ -1,12 +1,7 @@
-import {FC, useCallback, useEffect} from 'react'
-import {Navigate, NavLink, Outlet, Route, Routes, useLocation} from "react-router-dom"
-import {AnimatePresence, useAnimate, motion} from "framer-motion"
+import {FC} from 'react'
+import {Navigate, NavLink, Outlet, Route, Routes, useLocation, useMatch, useNavigate} from "react-router-dom"
+import {AnimatePresence} from "framer-motion"
 import '@styles/app.css'
-
-import A from '@assets/logo-parts/a.svg'
-import D from '@assets/logo-parts/d.svg'
-import N from '@assets/logo-parts/n.svg'
-import E from '@assets/logo-parts/e.svg'
 
 import Main from '@pages/main.tsx'
 import About from '@pages/about.tsx'
@@ -17,43 +12,49 @@ import Contacts from "@pages/contacts.tsx"
 import Projects from "@pages/projects.tsx"
 import Stats from "@pages/stats.tsx";
 
-const FirstVisitScene: FC = () => {
-    const [scope, animate] = useAnimate()
 
-    useEffect(() => {
+const DropdownNavLink: FC<{route: string, label: string}> = ({route, label}) => {
+    const match = useMatch(route + '/*')
+    const navigate = useNavigate()
 
-    }, [])
+    const navlinkUpdateClass = (props: {isActive: boolean}) => `navigation__link ${props.isActive ? 'navigation__link--active' : 'navigation__link--inactive'}`
 
     return (
-        <div className='first-visit-scene' ref={scope}>
-            <div className="characters">
-                <img src={A} alt="A"/>
-                <img src={D} alt="D"/>
-                <img src={A} alt="A"/>
-                <img src={N} alt="N"/>
-                <img src={E} alt="E"/>
-                <img src={D} alt="D"/>
-                <img src={E} alt="E"/>
+        <span className={`relative cursor-pointer ${navlinkUpdateClass({isActive: !!match})}`}>
+            <span onClick={() => navigate(route)}>{label}</span>
+            <div className={`${!match ? 'hidden' : 'flex'} absolute -right-6 top-1/2 -translate-y-1/2 translate-x-full flex-col items-start`}>
+                <NavLink key='page--investors-plan' className={navlinkUpdateClass} to={`${route}/plan`}>Plan</NavLink>
+                <NavLink key='page--investors-vision' className={navlinkUpdateClass} to={`${route}/vision`}>Vision</NavLink>
+                <NavLink key='page--investors-stats' className={navlinkUpdateClass} to={`${route}/stats`}>Stats</NavLink>
             </div>
-            <p>
-                huetnashuae
-            </p>
-        </div>
+        </span>
     )
 }
 
 const Layout: FC = () => {
-    const navlinkUpdateClass = useCallback((props: {isActive: boolean, isPending: boolean}) => {
-        return `navigation__link ${props.isActive ? 'navigation__link--active' : 'navigation__link--inactive'}`
-    }, [])
+    const navlinkUpdateClass = (props: {isActive: boolean}) => `navigation__link ${props.isActive ? 'navigation__link--active' : 'navigation__link--inactive'}`
 
     return (
         <main className='app relative min-h-[100dvh] flex flex-col'>
-            <div className="lg:container lg:mx-auto px-4 lg:px-8 pt-12 pb-4 text-center">
+
+            {/*Desktop navigation bar*/}
+            <div className="hidden lg:block lg:container lg:mx-auto px-4 lg:px-8 pt-12 pb-4 text-center">
                 <NavLink to='/'>
                     <span>
                         <img src="/logo.svg" alt="adanede logo" className="h-11 w-auto inline-block"/>
                         <h1 className='uppercase mt-2'>Adanede</h1>
+                    </span>
+                </NavLink>
+            </div>
+
+            {/*Mobile navigation bar*/}
+            <div className="lg:hidden container mx-auto p-8 flex items-center justify-between text-center">
+                <div className="h-8 w-8 bg-amber-500">
+
+                </div>
+                <NavLink to='/'>
+                    <span>
+                        <img src="/logo.svg" alt="adanede logo" className="h-11 w-auto inline-block"/>
                     </span>
                 </NavLink>
             </div>
@@ -63,7 +64,7 @@ const Layout: FC = () => {
                     <NavLink key='page--about' className={navlinkUpdateClass} to='/about'>About</NavLink>
                     <NavLink key='page--projects' className={navlinkUpdateClass} to='/projects'>Projects</NavLink>
                     <NavLink key='page--whitepaper' className={navlinkUpdateClass} to='/whitepaper'>Whitepaper</NavLink>
-                    <NavLink key='page--investors' className={navlinkUpdateClass} to='/investors'>Investor's</NavLink>
+                    <DropdownNavLink route='/investors' label="Investor's"/>
                     <NavLink key='page--contacts' className={navlinkUpdateClass} to='/contacts'>Contacts</NavLink>
                 </div>
                 <Outlet/>
@@ -74,8 +75,10 @@ const Layout: FC = () => {
     )
 };
 
+
 const App: FC = () => {
     const location = useLocation()
+
 
     return (
         <AnimatePresence mode='wait' initial={false}>
@@ -85,11 +88,10 @@ const App: FC = () => {
                     <Route path='about' element={<About/>}/>
                     <Route path='projects' element={<Projects/>}/>
                     <Route path='whitepaper' element={<Whitepaper/>}/>
-                    <Route path='investors'>
-                        <Route path='plan' element={<Plan/>}/>
-                        <Route path='' element={<Vision/>}/>
-                        <Route path='stats' element={<Stats/>}/>
-                    </Route>
+                    <Route path='investors' element={<Navigate to='/investors/vision'/>}/>
+                    <Route path='investors/plan' element={<Plan/>}/>
+                    <Route path='investors/vision' element={<Vision/>}/>
+                    <Route path='investors/stats' element={<Stats/>}/>
                     <Route path='contacts' element={<Contacts/>}/>
                 </Route>
             </Routes>

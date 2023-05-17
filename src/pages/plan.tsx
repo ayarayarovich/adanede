@@ -8,7 +8,7 @@ const Plan: FC = () => {
         <>
             <div className="col-span-12 lg:col-span-6 lg:col-start-4 flex items-center">
                 <div className="relative">
-                    <RouteAnimatedDiv className="lg:max-h-[75vh] lg:overflow-auto scroll-smooth py-8 px-2">
+                    <RouteAnimatedDiv className="lg:max-h-[75vh] lg:overflow-auto scroll-smooth py-8 lg:px-2">
                         <h2 className="text-4xl font-serif mb-4">Stage 1. Inception</h2>
                         <p className="text-base mb-8">At this stage, we will create the most iconic and traditional projects and products. They will be simple, but premium. From here you will recognize our identity. Through the results of our work we convey our ideas, approaches and attitude to the intended visual and semantic content, show the values and foundation on which the brand will be built, and bring people together, gathering the efforts of all like-minded people for the process of creation</p>
 
