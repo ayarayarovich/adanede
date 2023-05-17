@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import {Navigate, NavLink, Outlet, Route, Routes, useLocation, useMatch, useNavigate} from "react-router-dom"
+import {Navigate, NavLink, Outlet, Route, Routes, useLocation, useMatch} from "react-router-dom"
 import {AnimatePresence} from "framer-motion"
 import '@styles/app.css'
 
@@ -15,13 +15,12 @@ import Stats from "@pages/stats.tsx";
 
 const DropdownNavLink: FC<{route: string, label: string}> = ({route, label}) => {
     const match = useMatch(route + '/*')
-    const navigate = useNavigate()
 
     const navlinkUpdateClass = (props: {isActive: boolean}) => `navigation__link ${props.isActive ? 'navigation__link--active' : 'navigation__link--inactive'}`
 
     return (
-        <span className={`relative cursor-pointer ${navlinkUpdateClass({isActive: !!match})}`}>
-            <span onClick={() => navigate(route)}>{label}</span>
+        <span className={`relative`}>
+            <NavLink key='page--investors' className={navlinkUpdateClass} to='/investors'>Investor's</NavLink>
             <div className={`${!match ? 'hidden' : 'flex'} absolute -right-6 top-1/2 -translate-y-1/2 translate-x-full flex-col items-start`}>
                 <NavLink key='page--investors-plan' className={navlinkUpdateClass} to={`${route}/plan`}>Plan</NavLink>
                 <NavLink key='page--investors-vision' className={navlinkUpdateClass} to={`${route}/vision`}>Vision</NavLink>

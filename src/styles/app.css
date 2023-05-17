@@ -60,7 +60,7 @@
 /*}*/
 .navigation__link {
   text-transform: uppercase;
-  line-height: 2;
+  padding-block: 0.2em;
   margin-block: 0.5em;
   position: relative;
 }
