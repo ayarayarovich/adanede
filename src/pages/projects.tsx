@@ -5,6 +5,7 @@ import ProjectDescription from "@components/project-description.tsx";
 import {Project} from "@interfaces/project.ts";
 import {useState} from "react";
 import {Effects} from "@interfaces/effects.ts";
+import {Helmet} from "react-helmet";
 
 
 
@@ -34,6 +35,9 @@ const Projects: FC = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Projects</title>
+            </Helmet>
             <RouteAnimatedDiv className="col-span-12 lg:col-span-6 lg:col-start-4 flex items-center justify-center">
                 <img src={comingSoon} alt=''/>
             </RouteAnimatedDiv>

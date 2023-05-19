@@ -77,13 +77,11 @@
 }
 .navigation__link--active {
 }
-.navigation__link:hover::after,
-.navigation__link:focus::after,
 .navigation__link--active::after {
   width: 100%;
 }
 .navigation__link--inactive {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 /*.special-text {*/

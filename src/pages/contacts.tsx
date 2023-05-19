@@ -5,6 +5,7 @@ import SpecialText from "@components/special-text.tsx"
 import adanede from '@assets/adanede.svg'
 import associated from '@assets/associated.svg'
 import behindTheScene from '@assets/behind-the-scene.svg'
+import {Helmet} from "react-helmet";
 
 const Contacts: FC = () => {
 
@@ -28,23 +29,26 @@ const Contacts: FC = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Contacts</title>
+            </Helmet>
             <RouteAnimatedDiv className="col-span-12 lg:col-span-6 lg:col-start-4 flex items-center">
                 <motion.div variants={container} initial='hidden' animate='show' className="w-full flex flex-col items-start sm:flex-row sm:items-baseline sm:justify-around">
-                    <motion.div whileHover="scale" variants={listItem} className="mb-4 flex flex-col flex-grow flex-shrink basis-0 sm:items-center">
+                    <motion.div whileHover="scale" variants={listItem} className="mb-16 sm:mb-0 flex flex-col flex-grow flex-shrink basis-0 sm:items-center">
                         <img className='hidden sm:block w-auto h-64 mb-12' src={adanede} alt=""/>
-                        <h2 className='font-serif text-4xl sm:text-2xl mb-2'>Adanede</h2>
-                        <p className='ml-2 mb-2 sm:ml-0'>@adanedeofficial</p>
-                        <p className='ml-2 mb-2 sm:ml-0'>info@adanede.com</p>
-                        <p className='ml-2 mb-2 sm:ml-0'>adanede.eth</p>
+                        <h2 className='font-serif text-5xl sm:text-2xl mb-8 sm:mb-2'>Adanede</h2>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>@adanedeofficial</p>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>info@adanede.com</p>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>adanede.eth</p>
                     </motion.div>
                     <motion.div whileHover="scale" variants={listItem} className="flex flex-col flex-grow flex-shrink basis-0 sm:items-center">
                         <img className='hidden sm:block w-auto h-64 mb-12' src={associated} alt=""/>
-                        <h2 className='font-serif text-4xl sm:text-2xl mb-2'>Associated</h2>
-                        <p className='ml-2 mb-2 sm:ml-0'>@vronsoeth</p>
-                        <p className='ml-2 mb-2 sm:ml-0'>@bamboo_eth</p>
-                        <p className='ml-2 mb-2 sm:ml-0'>@BigFloppaeth</p>
-                        <p className='ml-2 mb-2 sm:ml-0'>@reezo_eth</p>
-                        <p className='ml-2 mb-2 sm:ml-0'>@optoai_</p>
+                        <h2 className='font-serif text-5xl sm:text-2xl mb-8 sm:mb-2'>Associated</h2>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>@vronsoeth</p>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>@bamboo_eth</p>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>@BigFloppaeth</p>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>@reezo_eth</p>
+                        <p className='text-2xl ml-2 mb-4 sm:mb-2 sm:text-base sm:ml-0'>@optoai_</p>
                     </motion.div>
                     <motion.div whileHover="scale" variants={listItem} className="hidden sm:flex flex-col flex-grow flex-shrink basis-0 items-center">
                         <img className='hidden sm:block w-auto h-64 mb-12' src={behindTheScene} alt=""/>
